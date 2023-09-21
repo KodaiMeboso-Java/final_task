@@ -9,4 +9,4 @@ CREATE TABLE swimmers (
 
 INSERT INTO swimmers (id, name, stroke) VALUES (1,'目細広大','平泳ぎ');
 INSERT INTO swimmers (id, name, stroke) VALUES (2,'入江凌介','背泳ぎ');
-INSERT INTO swimmers (id, name, stroke) VALUES (3,'小方颯','個人メドレー');
+INSERT INTO swimmers (id, name, stroke) VALUES (3,'瀬戸大也','個人メドレー');
