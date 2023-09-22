@@ -2,7 +2,7 @@ package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmers;
 import com.example.final_task.exception.ResourceNotFoundException;
-import com.example.final_task.form.CreateSwimmers;
+import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class SwimmersServiceImpl implements SwimmersService {
     }
 
     @Override
-    public void create(CreateSwimmers createSwimmers){
-        swimmersMapper.create(createSwimmers);
+    public Swimmers create(String name, String stroke) {
+        return swimmersMapper.create(name, stroke);
     }
 }

@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateSwimmers {
+public class CreateSwimmer {
     @NotBlank
     private String name;
     @NotBlank

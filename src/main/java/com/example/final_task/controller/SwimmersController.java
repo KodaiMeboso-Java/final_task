@@ -1,7 +1,7 @@
 package com.example.final_task.controller;
 
 import com.example.final_task.entity.Swimmers;
-import com.example.final_task.form.CreateSwimmers;
+import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +39,11 @@ public class SwimmersController {
     }
 
     @PostMapping("/swimmers")
-    public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmers createSwimmers, UriComponentsBuilder uriComponentsBuilder) {
-        swimmersService.create(createSwimmers);
+    public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmer createSwimmer, UriComponentsBuilder uriComponentsBuilder) {
+        Swimmers swimmers =  swimmersService.create(createSwimmer.getName(),createSwimmer.getStroke());
         URI uri = uriComponentsBuilder
                 .path("/swimmers/{id}")
-                .buildAndExpand(createSwimmers.getId())
+                .buildAndExpand(swimmers.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(Map.of("message", "name successfully created"));
     }
