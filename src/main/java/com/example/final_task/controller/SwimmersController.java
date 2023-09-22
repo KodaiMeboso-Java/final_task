@@ -1,6 +1,6 @@
 package com.example.final_task.controller;
 
-import com.example.final_task.entity.Swimmers;
+import com.example.final_task.entity.Swimmer;
 import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
@@ -29,21 +29,21 @@ public class SwimmersController {
     }
 
     @GetMapping("/swimmers")
-    public List<Swimmers> swimmers() {
+    public List<Swimmer> swimmers() {
         return swimmersService.findAll();
     }
 
     @GetMapping("/swimmers/{id}")
-    public Swimmers selectOneSwimmer(@PathVariable("id") int id) {
+    public Swimmer selectOneSwimmer(@PathVariable("id") int id) {
         return swimmersService.findById(id);
     }
 
     @PostMapping("/swimmers")
     public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmer createSwimmer, UriComponentsBuilder uriComponentsBuilder) {
-        Swimmers swimmers =  swimmersService.create(createSwimmer.getName(),createSwimmer.getStroke());
+        Swimmer swimmer =  swimmersService.create(swimmer);
         URI uri = uriComponentsBuilder
                 .path("/swimmers/{id}")
-                .buildAndExpand(swimmers.getId())
+                .buildAndExpand(swimmer.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(Map.of("message", "name successfully created"));
     }

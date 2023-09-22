@@ -1,8 +1,7 @@
 package com.example.final_task.service;
 
-import com.example.final_task.entity.Swimmers;
+import com.example.final_task.entity.Swimmer;
 import com.example.final_task.exception.ResourceNotFoundException;
-import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +16,20 @@ public class SwimmersServiceImpl implements SwimmersService {
         this.swimmersMapper = swimmersMapper;
     }
 
-    public List<Swimmers> findAll() {
+    public List<Swimmer> findAll() {
         return swimmersMapper.findAll();
     }
 
     @Override
-    public Swimmers findById(int id) {
-        Optional<Swimmers> swimmers = this.swimmersMapper.findById(id);
-        return swimmers.orElseThrow(() -> new ResourceNotFoundException("cannot find data!!"));
+    public Swimmer findById(int id) {
+        Optional<Swimmer> swimmer = this.swimmersMapper.findById(id);
+        return Swimmer.orElseThrow(() -> new ResourceNotFoundException("cannot find data!!"));
     }
 
     @Override
-    public Swimmers create(String name, String stroke) {
-        return swimmersMapper.create(name, stroke);
+    public void create(Swimmer swimmer) {
+        Swimmer swimmer = new Swimmer(name, stroke);
+        SwimmersMapper.create(swimmer);
+        return swimmer;
     }
 }

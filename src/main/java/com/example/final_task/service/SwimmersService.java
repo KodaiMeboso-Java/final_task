@@ -1,15 +1,14 @@
 package com.example.final_task.service;
 
-import com.example.final_task.entity.Swimmers;
-import com.example.final_task.form.CreateSwimmer;
+import com.example.final_task.entity.Swimmer;
 
 import java.util.List;
 
 public interface SwimmersService {
-    List<Swimmers> findAll();
+    List<Swimmer> findAll();
 
-    Swimmers findById(int id);
+    Swimmer findById(int id);
 
-    Swimmers create(String name,String stroke);
+    void create(Swimmer swimmer);
 
 }
