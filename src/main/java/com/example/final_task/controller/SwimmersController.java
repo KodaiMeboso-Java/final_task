@@ -40,7 +40,7 @@ public class SwimmersController {
 
     @PostMapping("/swimmers")
     public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmer createSwimmer, UriComponentsBuilder uriComponentsBuilder) {
-        Swimmer swimmer =  swimmersService.create(swimmer);
+        Swimmer swimmer = swimmersService.create(createSwimmer);
         URI uri = uriComponentsBuilder
                 .path("/swimmers/{id}")
                 .buildAndExpand(swimmer.getId())

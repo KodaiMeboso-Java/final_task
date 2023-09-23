@@ -1,6 +1,7 @@
 package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.form.CreateSwimmer;
 
 import java.util.List;
 
@@ -9,6 +10,6 @@ public interface SwimmersService {
 
     Swimmer findById(int id);
 
-    void create(Swimmer swimmer);
+    Swimmer create(CreateSwimmer createSwimmer);
 
 }

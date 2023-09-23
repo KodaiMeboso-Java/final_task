@@ -1,6 +1,7 @@
 package com.example.final_task.mapper;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.form.CreateSwimmer;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
