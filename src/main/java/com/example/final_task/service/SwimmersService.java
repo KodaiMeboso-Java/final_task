@@ -10,6 +10,6 @@ public interface SwimmersService {
 
     Swimmer findById(int id);
 
-    Swimmer create(CreateSwimmer createSwimmer);
+    Swimmer create(String name, String stroke);
 
 }

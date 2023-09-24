@@ -14,6 +14,7 @@ import java.util.Optional;
 public class SwimmersServiceImpl implements SwimmersService {
 
     SwimmersMapper swimmersMapper;
+    CreateSwimmer createSwimmer;
 
     public SwimmersServiceImpl(SwimmersMapper swimmersMapper) {
         this.swimmersMapper = swimmersMapper;
@@ -30,8 +31,10 @@ public class SwimmersServiceImpl implements SwimmersService {
     }
 
     @Override
-    public Swimmer create(CreateSwimmer createSwimmer) {
-        Swimmer swimmer = new Swimmer(createSwimmer.getName(), createSwimmer.getStroke());
+    public Swimmer create(String name, String stroke) {
+        Swimmer swimmer = new Swimmer(name, stroke);
+        swimmer.setName(name);
+        swimmer.setStroke(stroke);
         swimmersMapper.create(swimmer);
         return swimmer;
     }

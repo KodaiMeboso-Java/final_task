@@ -40,12 +40,12 @@ public class SwimmersController {
 
     @PostMapping("/swimmers")
     public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmer createSwimmer, UriComponentsBuilder uriComponentsBuilder) {
-        Swimmer swimmer = swimmersService.create(createSwimmer);
+        Swimmer swimmer = swimmersService.create(createSwimmer.getName(), createSwimmer.getStroke());
         URI uri = uriComponentsBuilder
                 .path("/swimmers/{id}")
                 .buildAndExpand(swimmer.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(Map.of("message", "name successfully created"));
+        return ResponseEntity.created(uri).body(Map.of("message", "data successfully created"));
     }
 }
 
