@@ -2,9 +2,7 @@ package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmer;
 import com.example.final_task.exception.ResourceNotFoundException;
-import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +12,6 @@ import java.util.Optional;
 public class SwimmersServiceImpl implements SwimmersService {
 
     SwimmersMapper swimmersMapper;
-    CreateSwimmer createSwimmer;
-
     public SwimmersServiceImpl(SwimmersMapper swimmersMapper) {
         this.swimmersMapper = swimmersMapper;
     }
