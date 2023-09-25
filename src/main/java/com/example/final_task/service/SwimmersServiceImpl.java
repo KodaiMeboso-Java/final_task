@@ -1,6 +1,7 @@
 package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.exception.NameNotFoundException;
 import com.example.final_task.exception.ResourceNotFoundException;
 import com.example.final_task.mapper.SwimmersMapper;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,13 @@ public class SwimmersServiceImpl implements SwimmersService {
         swimmer.setStroke(stroke);
         swimmersMapper.create(swimmer);
         return swimmer;
+    }
+
+    @Override
+    public void update(int id, String name, String stroke) {
+        findById(id);
+        Optional.ofNullable(name).orElseThrow(() -> new NameNotFoundException("Name cannot null!"));
+        Optional.ofNullable(stroke).orElseThrow(() -> new StringIndexOutOfBoundsException("Stroke cannot null!"));
+        swimmersMapper.update(id, name, stroke);
     }
 }
