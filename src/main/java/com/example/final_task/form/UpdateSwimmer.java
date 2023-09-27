@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateSwimmer {
+public class UpdateSwimmer {
     @NotBlank(message = "Name cannot be null!")
     private String name;
     @NotBlank(message = "Stroke cannot be null!")

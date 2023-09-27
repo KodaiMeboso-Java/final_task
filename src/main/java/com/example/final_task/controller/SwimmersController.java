@@ -2,6 +2,7 @@ package com.example.final_task.controller;
 
 import com.example.final_task.entity.Swimmer;
 import com.example.final_task.form.CreateSwimmer;
+import com.example.final_task.form.UpdateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
 import org.springframework.http.HttpStatus;
@@ -52,8 +53,8 @@ public class SwimmersController {
     }
 
     @PatchMapping("/swimmers/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody @Validated CreateSwimmer createSwimmer) {
-        swimmersService.update(id, createSwimmer.getName(), createSwimmer.getStroke());
+    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody @Validated UpdateSwimmer updateSwimmer) {
+        swimmersService.update(id, updateSwimmer.getName(), updateSwimmer.getStroke());
         return ResponseEntity.ok("date successfully updated!");
     }
 }
