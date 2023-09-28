@@ -12,22 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @RestControllerAdvice
 public class SwimmersExceptionHandler {
-    //    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-//        // ここでエラーメッセージを作成
-//        String errorMessage = "Validation failed for argument(s): ";
-//        errorMessage += ex.getBindingResult().getFieldErrors().stream()
-//                .map(error -> error.getDefaultMessage())
-//                .collect(Collectors.joining(", "));
-//
-//        // エラーメッセージとHTTPステータスを返す
-//        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
-//    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<Map<String, String>> errors = new ArrayList<>();

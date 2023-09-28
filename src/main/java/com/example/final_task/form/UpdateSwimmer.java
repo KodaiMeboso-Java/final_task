@@ -13,7 +13,7 @@ public class UpdateSwimmer {
 
     @AssertTrue(message = "name or stroke cannot null!")
     public boolean isNameOrStrokeNotBlank() {
-        // givenNameかfamilyNameがnullまたは空文字または半角スペースのときにfalseを返す
+        // nameかstrokeがnullまたは空文字または半角スペースのときにfalseを返す
         if (name == null || stroke == null) {
             return false;
         } else if (name.isBlank() || stroke.isBlank()) {
