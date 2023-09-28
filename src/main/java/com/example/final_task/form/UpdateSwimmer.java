@@ -8,9 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateSwimmer {
-    @NotBlank
     private String name;
-    @NotBlank
     private String stroke;
 
     @AssertTrue(message = "name or stroke cannot null!")
