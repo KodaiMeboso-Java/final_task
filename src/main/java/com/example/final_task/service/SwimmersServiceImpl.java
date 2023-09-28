@@ -1,10 +1,7 @@
 package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmer;
-import com.example.final_task.exception.NameAndStrokeNotFoundException;
-import com.example.final_task.exception.NameNotFoundException;
 import com.example.final_task.exception.ResourceNotFoundException;
-import com.example.final_task.exception.StrokeNotFoundException;
 import com.example.final_task.mapper.SwimmersMapper;
 import org.springframework.stereotype.Service;
 
@@ -42,14 +39,6 @@ public class SwimmersServiceImpl implements SwimmersService {
     @Override
     public void update(int id, String name, String stroke) {
         findById(id);
-        if (name != null && stroke != null) {
-            swimmersMapper.update(id, name, stroke);
-        } else if (name == null && stroke == null) {
-            throw new NameAndStrokeNotFoundException("Name & Stroke cannot be null!");
-        } else if (name == null) {
-            throw new NameNotFoundException("Name cannot null!");
-        } else {
-            throw new StrokeNotFoundException("Stroke cannot null!");
-        }
+        swimmersMapper.update(id, name, stroke);
     }
 }
