@@ -12,6 +12,7 @@ import java.util.Optional;
 public class SwimmersServiceImpl implements SwimmersService {
 
     SwimmersMapper swimmersMapper;
+
     public SwimmersServiceImpl(SwimmersMapper swimmersMapper) {
         this.swimmersMapper = swimmersMapper;
     }
@@ -34,4 +35,16 @@ public class SwimmersServiceImpl implements SwimmersService {
         swimmersMapper.create(swimmer);
         return swimmer;
     }
+
+    @Override
+    public void update(int id, String name, String stroke) {
+        Optional<Swimmer> swimmer = swimmersMapper.findById(id);
+        swimmer.ifPresentOrElse(
+                s -> swimmersMapper.update(id, name, stroke),
+                () -> {
+                    throw new ResourceNotFoundException("cannot find data!!");
+                }
+        );
+    }
+
 }

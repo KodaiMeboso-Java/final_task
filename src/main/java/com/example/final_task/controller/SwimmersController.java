@@ -2,11 +2,15 @@ package com.example.final_task.controller;
 
 import com.example.final_task.entity.Swimmer;
 import com.example.final_task.form.CreateSwimmer;
+import com.example.final_task.form.UpdateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +50,12 @@ public class SwimmersController {
                 .buildAndExpand(swimmer.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(Map.of("message", "data successfully created"));
+    }
+
+    @PatchMapping("/swimmers/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody @Validated UpdateSwimmer updateSwimmer) {
+        swimmersService.update(id, updateSwimmer.getName(), updateSwimmer.getStroke());
+        return ResponseEntity.ok("date successfully updated!");
     }
 }
 
