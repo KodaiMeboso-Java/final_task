@@ -71,9 +71,4 @@ public class SwimmersExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
-
-    @ExceptionHandler(NameAndStrokeNotFoundException.class)
-    public ResponseEntity<String> handleNameAndStrokeNotFoundException(NameAndStrokeNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-    }
 }

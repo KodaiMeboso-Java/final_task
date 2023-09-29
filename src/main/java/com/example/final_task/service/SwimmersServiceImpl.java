@@ -38,7 +38,13 @@ public class SwimmersServiceImpl implements SwimmersService {
 
     @Override
     public void update(int id, String name, String stroke) {
-        findById(id);
-        swimmersMapper.update(id, name, stroke);
+        Optional<Swimmer> swimmer = swimmersMapper.findById(id);
+        swimmer.ifPresentOrElse(
+                s -> swimmersMapper.update(id, name, stroke),
+                () -> {
+                    throw new ResourceNotFoundException("cannot find data!!");
+                }
+        );
     }
+
 }
