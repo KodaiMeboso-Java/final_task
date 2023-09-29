@@ -47,4 +47,14 @@ public class SwimmersServiceImpl implements SwimmersService {
         );
     }
 
+    @Override
+    public void delete(int id) {
+        Optional<Swimmer> swimmer = swimmersMapper.findById(id);
+        swimmer.ifPresentOrElse(
+                s -> swimmersMapper.delete(id),
+                () -> {
+                    throw new ResourceNotFoundException("cannot find data!!");
+                }
+        );
+    }
 }
