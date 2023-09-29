@@ -60,7 +60,7 @@ public class SwimmersController {
     @DeleteMapping("/swimmers/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") int id) {
         swimmersService.delete(id);
-        return ResponseEntity.ok("data succesfull deleted!!");
+        return ResponseEntity.ok("data successfully deleted!!");
     }
 }
 
