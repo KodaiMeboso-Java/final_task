@@ -15,4 +15,6 @@ public interface SwimmersService {
 
     void update(int id, String name, String stroke);
 
+    void delete(int id);
+
 }

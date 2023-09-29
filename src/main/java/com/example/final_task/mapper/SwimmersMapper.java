@@ -1,6 +1,7 @@
 package com.example.final_task.mapper;
 
 import com.example.final_task.entity.Swimmer;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -24,4 +25,7 @@ public interface SwimmersMapper {
 
     @Update("UPDATE swimmers SET name = #{name}, stroke= #{stroke} WHERE id = #{id}")
     void update(int id, String name, String stroke);
+
+    @Delete("DELETE FROM swimmers WHERE id = #{id}")
+    void delete(int id);
 }
