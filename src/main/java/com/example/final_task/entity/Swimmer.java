@@ -3,6 +3,8 @@ package com.example.final_task.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class Swimmer {
@@ -21,4 +23,20 @@ public class Swimmer {
         this.name = name;
         this.stroke = stroke;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Swimmer swimmer = (Swimmer) o;
+        return id == swimmer.id &&
+                Objects.equals(name, swimmer.name) &&
+                Objects.equals(stroke, swimmer.stroke);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, stroke);
+    }
+
 }
