@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -29,12 +30,19 @@ class SwimmersServiceImplTest {
                 new Swimmer("meboso kodai", "breaststroke"),
                 new Swimmer("ikee rikkako", "butterfly"),
                 new Swimmer("irie ryosuke", "backstroke")
-                );
+        );
         doReturn(swimmerList).when(swimmersMapper).findAll();
         //テスト対象メソッドの呼び出し
         List<Swimmer> actual = swimmersServicelmpl.findAll();
         assertThat(actual).isEqualTo(swimmerList);
         verify(swimmersMapper, times(1)).findAll();
     }
+
+    @Test
+    public void 存在しないIDを指定したときにResourceNotFoundExceptionが発生すること() {
+        doReturn(Optional.empty()).when(swimmersMapper).findById(100);
+
+    }
+
 
 }
