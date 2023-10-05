@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class SwimmersServiceImplTest {
     @InjectMocks
-    SwimmersServiceImpl swimmersServicelmpl;
+    SwimmersServiceImpl swimmersServiceImpl;
     @Mock
     SwimmersMapper swimmersMapper;
 
@@ -32,7 +32,7 @@ public class SwimmersServiceImplTest {
         );
         doReturn(swimmerList).when(swimmersMapper).findAll();
         //テスト対象メソッドの呼び出し
-        List<Swimmer> actual = swimmersServicelmpl.findAll();
+        List<Swimmer> actual = swimmersServiceImpl.findAll();
         assertThat(actual).isEqualTo(swimmerList);
         verify(swimmersMapper, times(1)).findAll();
     }
@@ -41,7 +41,7 @@ public class SwimmersServiceImplTest {
     public void 存在するIdを指定したときに水泳選手を取得できること() {
         doReturn(Optional.of(new Swimmer(1, "meboso", "breaststroke"))).when(swimmersMapper).findById(1);
 
-        Swimmer actual = swimmersServicelmpl.findById(1);
+        Swimmer actual = swimmersServiceImpl.findById(1);
         assertThat(actual).isEqualTo(new Swimmer(1,"meboso","breaststroke"));
         verify(swimmersMapper,times(1)).findById(1);
     }
