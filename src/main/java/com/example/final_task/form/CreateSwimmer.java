@@ -11,4 +11,9 @@ public class CreateSwimmer {
     private String name;
     @NotBlank(message = "Stroke cannot be null!")
     private String stroke;
+
+    public CreateSwimmer(String name, String stroke) {
+        this.name = name;
+        this.stroke = stroke;
+    }
 }
