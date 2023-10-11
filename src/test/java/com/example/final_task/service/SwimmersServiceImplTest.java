@@ -1,6 +1,7 @@
 package com.example.final_task.service;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.exception.ResourceNotFoundException;
 import com.example.final_task.form.CreateSwimmer;
 import com.example.final_task.mapper.SwimmersMapper;
 import org.hamcrest.MatcherAssert;
@@ -14,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
@@ -45,6 +46,7 @@ public class SwimmersServiceImplTest {
     @Autowired
     MockMvc mockMvc;
     CreateSwimmer createSwimmer = new CreateSwimmer("u1Nk","H4yjt");
+    BindingResult bindingResult;
 
     @Test
     public void 存在する水泳選手がすべて取得できること() {
@@ -67,6 +69,14 @@ public class SwimmersServiceImplTest {
         Swimmer actual = swimmersServiceImpl.findById(1);
         assertThat(actual).isEqualTo(new Swimmer(1, "meboso", "breaststroke"));
         verify(swimmersMapper, times(1)).findById(1);
+    }
+    @Test
+    public void 存在しないIDを指定したときにResourceNotFoundExceptionが発生すること() {
+        doReturn(Optional.empty()).when(swimmersMapper).findById(100);
+
+        assertThatThrownBy(() -> swimmersServiceImpl.findById(100))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("cannot find data!!");
     }
 
     //Mapperの単体テスト
