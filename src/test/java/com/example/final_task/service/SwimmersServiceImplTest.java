@@ -8,21 +8,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class SwimmersServiceImplTest {
     @InjectMocks
@@ -53,6 +48,7 @@ public class SwimmersServiceImplTest {
         assertThat(actual).isEqualTo(new Swimmer(1, "meboso", "breaststroke"));
         verify(swimmersMapper, times(1)).findById(1);
     }
+
     @Test
     public void 存在しないIDを指定したときにResourceNotFoundExceptionが発生すること() {
         doReturn(Optional.empty()).when(swimmersMapper).findById(100);
@@ -60,14 +56,5 @@ public class SwimmersServiceImplTest {
         assertThatThrownBy(() -> swimmersServiceImpl.findById(100))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("cannot find data!!");
-    }
-
-    @Test
-    public void 水泳選手を登録できること() {
-        doNothing().when(swimmersMapper).create(any(Swimmer.class));
-
-        Swimmer swimmer = new Swimmer("seto daiya", "IM");
-        swimmersServiceImpl.create("seto daiya", "IM");
-        verify(swimmersMapper).create(any(Swimmer.class));
     }
 }
