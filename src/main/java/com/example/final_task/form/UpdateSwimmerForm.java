@@ -1,13 +1,12 @@
 package com.example.final_task.form;
 
 import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateSwimmer {
+public class UpdateSwimmerForm {
     private String name;
     private String stroke;
 
@@ -16,9 +15,6 @@ public class UpdateSwimmer {
         // nameかstrokeがnullまたは空文字または半角スペースのときにfalseを返す
         if (name == null || stroke == null) {
             return false;
-        } else if (name.isBlank() || stroke.isBlank()) {
-            return false;
-        }
-        return true;
+        } else return !name.isBlank() && !stroke.isBlank();
     }
 }

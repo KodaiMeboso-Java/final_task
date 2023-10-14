@@ -1,8 +1,8 @@
 package com.example.final_task.controller;
 
 import com.example.final_task.entity.Swimmer;
-import com.example.final_task.form.CreateSwimmer;
-import com.example.final_task.form.UpdateSwimmer;
+import com.example.final_task.form.CreateSwimmerForm;
+import com.example.final_task.form.UpdateSwimmerForm;
 import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +42,8 @@ public class SwimmersController {
     }
 
     @PostMapping("/swimmers")
-    public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmer createSwimmer, UriComponentsBuilder uriComponentsBuilder) {
-        Swimmer swimmer = swimmersService.create(createSwimmer.getName(), createSwimmer.getStroke());
+    public ResponseEntity<Map<String, String>> create(@RequestBody @Validated CreateSwimmerForm createSwimmerForm, UriComponentsBuilder uriComponentsBuilder) {
+        Swimmer swimmer = swimmersService.create(createSwimmerForm.getName(), createSwimmerForm.getStroke());
         URI uri = uriComponentsBuilder
                 .path("/swimmers/{id}")
                 .buildAndExpand(swimmer.getId())
@@ -52,8 +52,8 @@ public class SwimmersController {
     }
 
     @PatchMapping("/swimmers/{id}")
-    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody @Validated UpdateSwimmer updateSwimmer) {
-        swimmersService.update(id, updateSwimmer.getName(), updateSwimmer.getStroke());
+    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody @Validated UpdateSwimmerForm updateSwimmerForm) {
+        swimmersService.update(id, updateSwimmerForm.getName(), updateSwimmerForm.getStroke());
         return ResponseEntity.ok("date successfully updated!");
     }
 
@@ -63,4 +63,3 @@ public class SwimmersController {
         return ResponseEntity.ok("data successfully deleted!!");
     }
 }
-

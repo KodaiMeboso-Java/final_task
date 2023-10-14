@@ -6,13 +6,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateSwimmer {
+public class CreateSwimmerForm{
     @NotBlank(message = "Name cannot be null!")
     private String name;
     @NotBlank(message = "Stroke cannot be null!")
     private String stroke;
 
-    public CreateSwimmer(String name, String stroke) {
+    public CreateSwimmerForm(String name, String stroke) {
         this.name = name;
         this.stroke = stroke;
     }
