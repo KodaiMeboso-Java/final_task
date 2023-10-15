@@ -1,7 +1,5 @@
 package com.example.final_task.form;
 
-import com.example.final_task.mapper.SwimmersMapper;
-import com.example.final_task.service.SwimmersServiceImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -16,10 +14,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class UpdateSwimmerFormTest {
     public static Validator validator;
-
-    SwimmersServiceImpl swimmersServiceImpl;
-
-    SwimmersMapper swimmersMapper;
 
     @BeforeAll
     public static void setUpValidator() {
@@ -86,6 +80,36 @@ public class UpdateSwimmerFormTest {
     @Test
     public void UpdateSwimmerFormのstrokeが空文字のときにerrorを返すこと() throws ParseException {
         UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "lt6", "");
+        Set<ConstraintViolation<UpdateSwimmerForm>> violations =
+                Validation
+                        .buildDefaultValidatorFactory()
+                        .getValidator()
+                        .validate(updateSwimmerForm);
+        assertThat(violations.size()).isEqualTo(1);
+        violations.forEach(action -> {
+            assertThat(action.getPropertyPath().toString()).isEqualTo("nameOrStrokeNotBlank");
+            assertThat(action.getMessage()).isEqualTo("Name or stroke cannot null!");
+        });
+    }
+
+    @Test
+    public void UpdateSwimmerFormのnameとstrokeがnullのときにerrorを返すこと() throws ParseException {
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, null, null);
+        Set<ConstraintViolation<UpdateSwimmerForm>> violations =
+                Validation
+                        .buildDefaultValidatorFactory()
+                        .getValidator()
+                        .validate(updateSwimmerForm);
+        assertThat(violations.size()).isEqualTo(1);
+        violations.forEach(action -> {
+            assertThat(action.getPropertyPath().toString()).isEqualTo("nameOrStrokeNotBlank");
+            assertThat(action.getMessage()).isEqualTo("Name or stroke cannot null!");
+        });
+    }
+
+    @Test
+    public void UpdateSwimmerFormのnameとstrokeが空文字のときにerrorを返すこと() throws ParseException {
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "", "");
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
