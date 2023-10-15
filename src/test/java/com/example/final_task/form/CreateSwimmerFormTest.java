@@ -2,8 +2,10 @@ package com.example.final_task.form;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.validation.Validator;
 
 import java.util.Set;
 
@@ -11,6 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateSwimmerFormTest {
     public static Validator validator;
+
+    @BeforeAll
+    public static void setUpValidator() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     @Test
     public void 水泳選手登録FormのnameもstrokeもNULLでない場合errorを返さないこと() {
