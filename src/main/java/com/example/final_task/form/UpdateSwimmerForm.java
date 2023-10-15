@@ -7,12 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateSwimmerForm {
+    private int id;
     private String name;
     private String stroke;
 
-    @AssertTrue(message = "name or stroke cannot null!")
+    public UpdateSwimmerForm(int id, String name, String stroke) {
+        this.id = id;
+        this.name = name;
+        this.stroke = stroke;
+    }
+
+    @AssertTrue(message = "Name or stroke cannot null!")
     public boolean isNameOrStrokeNotBlank() {
-        // nameかstrokeがnullまたは空文字または半角スペースのときにfalseを返す
         if (name == null || stroke == null) {
             return false;
         } else return !name.isBlank() && !stroke.isBlank();
