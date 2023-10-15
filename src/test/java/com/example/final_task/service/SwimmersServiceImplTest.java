@@ -22,6 +22,7 @@ import static org.mockito.Mockito.verify;
 public class SwimmersServiceImplTest {
     @InjectMocks
     SwimmersServiceImpl swimmersServiceImpl;
+
     @Mock
     SwimmersMapper swimmersMapper;
 
@@ -29,7 +30,7 @@ public class SwimmersServiceImplTest {
     public void 存在する水泳選手がすべて取得できること() {
         List<Swimmer> swimmerList = List.of(
                 new Swimmer(1, "meboso kodai", "breaststroke"),
-                new Swimmer(2, "ikee rikkako", "butterfly"),
+                new Swimmer(2, "ikee rikako", "butterfly"),
                 new Swimmer(3, "irie ryosuke", "backstroke")
         );
         doReturn(swimmerList).when(swimmersMapper).findAll();
@@ -56,5 +57,4 @@ public class SwimmersServiceImplTest {
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("cannot find data!!");
     }
-
 }
