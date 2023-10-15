@@ -21,7 +21,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void 水泳選手登録FormのnameもstrokeもNULLでない場合errorを返さないこと() {
+    public void CreateSwimmerFormのnameもstrokeもNULLでない場合errorを返さないこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("72OkyQQ", "rp66Tv");
         Set<ConstraintViolation<CreateSwimmerForm>> result =
                 Validation
@@ -32,7 +32,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void Nameがnullのときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのNameがnullのときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm(null, "3b3nCK");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
@@ -44,7 +44,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void Nameが空文字のときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのNameが空文字のときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("", "3b3nCK");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
@@ -56,7 +56,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void Strokeがnullのときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのStrokeがnullのときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("rwd8", null);
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
@@ -68,7 +68,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void Strokeが空文字のときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのStrokeが空文字のときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("B0LLd39", "");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
@@ -80,7 +80,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void NameとStrokeがnullのときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのNameとStrokeがnullのときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm(null, null);
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
@@ -92,7 +92,7 @@ public class CreateSwimmerFormTest {
     }
 
     @Test
-    public void NameとStrokeが空文字のときにエラーメッセージを返すこと() {
+    public void CreateSwimmerFormのNameとStrokeが空文字のときにエラーメッセージを返すこと() {
         CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("", "");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
