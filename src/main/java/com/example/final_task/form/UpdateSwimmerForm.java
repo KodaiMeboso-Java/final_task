@@ -11,8 +11,7 @@ public class UpdateSwimmerForm {
     private String name;
     private String stroke;
 
-    public UpdateSwimmerForm(int id, String name, String stroke) {
-        this.id = id;
+    public UpdateSwimmerForm(String name, String stroke) {
         this.name = name;
         this.stroke = stroke;
     }
