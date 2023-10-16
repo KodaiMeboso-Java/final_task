@@ -57,4 +57,13 @@ public class SwimmersServiceImplTest {
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("cannot find data!!");
     }
+
+    @Test
+    public void 存在しないIDのデータを更新たときにResourceNotFoundExceptionが発生すること() {
+        doReturn(Optional.empty()).when(swimmersMapper).findById(100);
+
+        assertThatThrownBy(() -> swimmersServiceImpl.update(100, "F2r", "03501jSm"))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("cannot find data!!");
+    }
 }
