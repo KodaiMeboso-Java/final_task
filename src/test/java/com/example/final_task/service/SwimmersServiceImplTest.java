@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class SwimmersServiceImplTest {
@@ -59,10 +60,27 @@ public class SwimmersServiceImplTest {
     }
 
     @Test
-    public void 存在しないIDのデータを更新たときにResourceNotFoundExceptionが発生すること() {
+    public void 存在しないIDのデータを更新したときにResourceNotFoundExceptionが発生すること() {
         doReturn(Optional.empty()).when(swimmersMapper).findById(100);
 
         assertThatThrownBy(() -> swimmersServiceImpl.update(100, "F2r", "03501jSm"))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("cannot find data!!");
+    }
+
+    @Test
+    public void 指定したIDのデータをを削除すること() {
+        Swimmer swimmer = new Swimmer(1, "KiCmXkg", "breaststroke");
+        when(swimmersMapper.findById(1)).thenReturn(Optional.of(swimmer));
+        swimmersServiceImpl.delete(1);
+        verify(swimmersMapper, times(1)).delete(1);
+    }
+
+    @Test
+    public void 存在しないIDのデータを削除したときにResourceNotFoundExceptionが発生すること() {
+        doReturn(Optional.empty()).when(swimmersMapper).findById(100);
+
+        assertThatThrownBy(() -> swimmersServiceImpl.delete(100))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("cannot find data!!");
     }

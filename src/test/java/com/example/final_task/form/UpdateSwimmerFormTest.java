@@ -23,7 +23,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのidとnameとstrokeも正常値である場合errorを返さないこと() {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "r4EpE1t", "101PK1a");
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm("r4EpE1t", "101PK1a");
         Set<ConstraintViolation<UpdateSwimmerForm>> result =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -34,7 +34,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのnameがnullのときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, null, "cAmfag");
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(null, "cAmfag");
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -49,7 +49,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのnameが空文字のときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "", "9P2");
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm("", "9P2");
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -64,7 +64,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのstrokeがnullのときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "5ZeeRR", null);
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm("5ZeeRR", null);
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -79,7 +79,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのstrokeが空文字のときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "lt6", "");
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm("lt6", "");
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -94,7 +94,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのnameとstrokeがnullのときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, null, null);
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(null, null);
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -109,7 +109,7 @@ public class UpdateSwimmerFormTest {
 
     @Test
     public void UpdateSwimmerFormのnameとstrokeが空文字のときにerrorを返すこと() throws ParseException {
-        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm(1, "", "");
+        UpdateSwimmerForm updateSwimmerForm = new UpdateSwimmerForm("", "");
         Set<ConstraintViolation<UpdateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
