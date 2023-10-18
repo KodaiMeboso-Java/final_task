@@ -23,10 +23,6 @@ class SwimmersMapperTest {
             scripts = {"/insert-swimmers.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
-    @Sql(
-            scripts = {"/clean-up.sql"},
-            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
-    )
     @Test
     @Transactional
     void 全ての水泳選手が取得できること() {
