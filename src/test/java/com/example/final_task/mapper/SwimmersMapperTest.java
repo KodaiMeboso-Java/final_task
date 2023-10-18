@@ -19,16 +19,20 @@ class SwimmersMapperTest {
     @Autowired
     SwimmersMapper swimmersMapper;
 
-    @Test
     @Sql(
-            scripts = {"/databases/insert-swimmers.sql"},
+            scripts = {"/insert-swimmers.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
+    @Sql(
+            scripts = {"/clean-up.sql"},
+            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
+    )
+    @Test
     @Transactional
     void 全ての水泳選手が取得できること() {
         List<Swimmer> swimmers = swimmersMapper.findAll();
         assertThat(swimmers)
-                .hasSize(1)
+                .hasSize(3)
                 .contains(
                         new Swimmer(1, "gg9eGx", "g7p1"),
                         new Swimmer(2, "6sc", "1J7mzyS"),
