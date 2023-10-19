@@ -30,9 +30,9 @@ class SwimmersMapperTest {
         assertThat(swimmers)
                 .hasSize(3)
                 .contains(
-                        new Swimmer(1, "gg9eGx", "g7p1"),
-                        new Swimmer(2, "6sc", "1J7mzyS"),
-                        new Swimmer(3, "9eGx", "g7FF1")
+                        new Swimmer(1, "Michael Phelps", "Butterfly"),
+                        new Swimmer(2, "Katie Ledecky", "Freestyle"),
+                        new Swimmer(3, "Adam Peaty", "Breaststroke")
                 );
     }
 

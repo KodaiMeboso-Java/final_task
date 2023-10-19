@@ -30,9 +30,9 @@ public class SwimmersServiceImplTest {
     @Test
     public void 存在する水泳選手がすべて取得できること() {
         List<Swimmer> swimmerList = List.of(
-                new Swimmer(1, "meboso kodai", "breaststroke"),
-                new Swimmer(2, "ikee rikako", "butterfly"),
-                new Swimmer(3, "irie ryosuke", "backstroke")
+                new Swimmer(1, "meboso kodai", "Breaststroke"),
+                new Swimmer(2, "ikee rikako", "Butterfly"),
+                new Swimmer(3, "irie ryosuke", "Backstroke")
         );
         doReturn(swimmerList).when(swimmersMapper).findAll();
         //テスト対象メソッドの呼び出し
@@ -43,10 +43,10 @@ public class SwimmersServiceImplTest {
 
     @Test
     public void 存在するIdを指定したときに水泳選手を取得できること() {
-        doReturn(Optional.of(new Swimmer(1, "meboso", "breaststroke"))).when(swimmersMapper).findById(1);
+        doReturn(Optional.of(new Swimmer(1, "meboso", "Breaststroke"))).when(swimmersMapper).findById(1);
 
         Swimmer actual = swimmersServiceImpl.findById(1);
-        assertThat(actual).isEqualTo(new Swimmer(1, "meboso", "breaststroke"));
+        assertThat(actual).isEqualTo(new Swimmer(1, "meboso", "Breaststroke"));
         verify(swimmersMapper, times(1)).findById(1);
     }
 
@@ -63,14 +63,14 @@ public class SwimmersServiceImplTest {
     public void 存在しないIDのデータを更新したときにResourceNotFoundExceptionが発生すること() {
         doReturn(Optional.empty()).when(swimmersMapper).findById(100);
 
-        assertThatThrownBy(() -> swimmersServiceImpl.update(100, "F2r", "03501jSm"))
+        assertThatThrownBy(() -> swimmersServiceImpl.update(100, "David Popovici", "Freestyle"))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("cannot find data!!");
     }
 
     @Test
     public void 指定したIDのデータをを削除すること() {
-        Swimmer swimmer = new Swimmer(1, "KiCmXkg", "breaststroke");
+        Swimmer swimmer = new Swimmer(1, "Lilly King", "Breaststroke");
         when(swimmersMapper.findById(1)).thenReturn(Optional.of(swimmer));
         swimmersServiceImpl.delete(1);
         verify(swimmersMapper, times(1)).delete(1);
