@@ -20,7 +20,7 @@ class SwimmersMapperTest {
     SwimmersMapper swimmersMapper;
 
     @Sql(
-            scripts = {"/insert-swimmers.sql"},
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
     )
     @Test
