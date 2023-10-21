@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -35,20 +35,21 @@ class SwimmersMapperTest {
                         new Swimmer(3, "Adam Peaty", "Breaststroke")
                 );
     }
-
-    @Test
-    void findById() {
-    }
-
-    @Test
-    void create() {
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void delete() {
-    }
+//
+//    @Test
+//    void findById() {
+//    }
+//
+//    @Test
+//    void create() {
+//    }
+//
+//    @Test
+//    void update() {
+//    }
+//
+//    @Test
+//    void delete() {
+//    }
+//    }
 }
