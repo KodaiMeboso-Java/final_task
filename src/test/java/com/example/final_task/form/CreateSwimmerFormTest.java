@@ -22,7 +22,7 @@ public class CreateSwimmerFormTest {
 
     @Test
     public void CreateSwimmerFormのnameもstrokeもNULLでない場合errorを返さないこと() {
-        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("72OkyQQ", "rp66Tv");
+        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("Summer Mclntosh", "IM");
         Set<ConstraintViolation<CreateSwimmerForm>> result =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -33,7 +33,7 @@ public class CreateSwimmerFormTest {
 
     @Test
     public void CreateSwimmerFormのNameがnullのときにエラーメッセージを返すこと() {
-        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm(null, "3b3nCK");
+        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm(null, "IM");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -45,7 +45,7 @@ public class CreateSwimmerFormTest {
 
     @Test
     public void CreateSwimmerFormのNameが空文字のときにエラーメッセージを返すこと() {
-        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("", "3b3nCK");
+        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("", "IM");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -57,7 +57,7 @@ public class CreateSwimmerFormTest {
 
     @Test
     public void CreateSwimmerFormのStrokeがnullのときにエラーメッセージを返すこと() {
-        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("rwd8", null);
+        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("Summer Mclntosh", null);
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
@@ -69,7 +69,7 @@ public class CreateSwimmerFormTest {
 
     @Test
     public void CreateSwimmerFormのStrokeが空文字のときにエラーメッセージを返すこと() {
-        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("B0LLd39", "");
+        CreateSwimmerForm createSwimmerForm = new CreateSwimmerForm("Summer Mclntosh", "");
         Set<ConstraintViolation<CreateSwimmerForm>> violations =
                 Validation
                         .buildDefaultValidatorFactory()
