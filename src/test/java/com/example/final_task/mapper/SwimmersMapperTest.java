@@ -9,6 +9,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,5 +35,28 @@ class SwimmersMapperTest {
                         new Swimmer(2, "Katie Ledecky", "Freestyle"),
                         new Swimmer(3, "Adam Peaty", "Breaststroke")
                 );
+    }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 指定した水泳選手が取得できること() {
+        Optional<Swimmer> swimmer = swimmersMapper.findById(1);
+        assertThat(swimmer).isEqualTo((Optional.of(new Swimmer(1, "Michael Phelps", "Butterfly"))));
+    }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 指定したidが存在しない場合に返ってくるデータが空であること() {
+        int id = 100;
+        Optional<Swimmer> swimmer = swimmersMapper.findById(id);
+        assertThat(swimmer).isEmpty();
     }
 }
