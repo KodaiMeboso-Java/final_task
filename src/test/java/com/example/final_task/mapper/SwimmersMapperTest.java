@@ -35,21 +35,4 @@ class SwimmersMapperTest {
                         new Swimmer(3, "Adam Peaty", "Breaststroke")
                 );
     }
-//
-//    @Test
-//    void findById() {
-//    }
-//
-//    @Test
-//    void create() {
-//    }
-//
-//    @Test
-//    void update() {
-//    }
-//
-//    @Test
-//    void delete() {
-//    }
-//    }
 }

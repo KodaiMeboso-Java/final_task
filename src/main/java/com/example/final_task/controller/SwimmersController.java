@@ -3,7 +3,6 @@ package com.example.final_task.controller;
 import com.example.final_task.entity.Swimmer;
 import com.example.final_task.form.CreateSwimmerForm;
 import com.example.final_task.form.UpdateSwimmerForm;
-import com.example.final_task.mapper.SwimmersMapper;
 import com.example.final_task.service.SwimmersService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,10 +23,7 @@ import java.util.Map;
 public class SwimmersController {
     public final SwimmersService swimmersService;
 
-    public final SwimmersMapper swimmersMapper;
-
-    public SwimmersController(SwimmersMapper swimmersMapper, SwimmersService swimmersService) {
-        this.swimmersMapper = swimmersMapper;
+    public SwimmersController(SwimmersService swimmersService) {
         this.swimmersService = swimmersService;
     }
 
