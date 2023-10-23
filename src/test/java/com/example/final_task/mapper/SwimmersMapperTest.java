@@ -70,4 +70,16 @@ class SwimmersMapperTest {
         Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
         swimmersMapper.create(swimmer);
     }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 更新した水泳選手の情報が反映されること() {
+        swimmersMapper.update(1, "Sarah Sjostrom", "IM");
+        Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(1);
+        assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
+    }
 }
