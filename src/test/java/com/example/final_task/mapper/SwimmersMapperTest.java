@@ -1,6 +1,8 @@
 package com.example.final_task.mapper;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.service.SwimmersService;
+import com.example.final_task.service.SwimmersServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ class SwimmersMapperTest {
 
     @Autowired
     SwimmersMapper swimmersMapper;
+
+    private SwimmersService swimmersService;
+
+    private SwimmersServiceImpl swimmersServiceImpl;
 
     @Sql(
             scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
@@ -58,5 +64,16 @@ class SwimmersMapperTest {
         int id = 100;
         Optional<Swimmer> swimmer = swimmersMapper.findById(id);
         assertThat(swimmer).isEmpty();
+    }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 新しい水泳選手が登録できること() {
+        Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
+        swimmersMapper.create(swimmer);
     }
 }
