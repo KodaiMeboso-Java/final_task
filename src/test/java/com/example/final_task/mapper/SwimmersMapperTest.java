@@ -1,6 +1,7 @@
 package com.example.final_task.mapper;
 
 import com.example.final_task.entity.Swimmer;
+import com.example.final_task.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -67,7 +70,7 @@ class SwimmersMapperTest {
     @Test
     @Transactional
     void 新しい水泳選手が登録できること() {
-        Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
+        Swimmer swimmer = new Swimmer("Zhang", "Fufei");
         swimmersMapper.create(swimmer);
     }
 
@@ -81,5 +84,22 @@ class SwimmersMapperTest {
         swimmersMapper.update(1, "Sarah Sjostrom", "IM");
         Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(1);
         assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
+    }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 更新した水泳選手の情報が反映されないこと() {
+        Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
+            swimmersMapper.update(100, "Sarah Sjostrom", "IM");
+            Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(100);
+            updatedSwimmer.orElseThrow(() -> new ResourceNotFoundException("cannot find data!!"));
+        });
+        String expectedMessage = "cannot find data!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
