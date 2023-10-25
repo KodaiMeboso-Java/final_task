@@ -59,4 +59,19 @@ class SwimmersMapperTest {
         Optional<Swimmer> swimmer = swimmersMapper.findById(id);
         assertThat(swimmer).isEmpty();
     }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 新しい水泳選手が登録できること() {
+        Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
+        swimmersMapper.create(swimmer);
+        Optional<Swimmer> retrievedSwimmer = swimmersMapper.findById(swimmer.getId());
+        assertThat(retrievedSwimmer).isPresent();
+        assertThat(retrievedSwimmer.get().getName()).isEqualTo(swimmer.getName());
+        assertThat(retrievedSwimmer.get().getStroke()).isEqualTo(swimmer.getStroke());
+    }
 }
