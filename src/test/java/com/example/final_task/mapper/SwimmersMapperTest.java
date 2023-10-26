@@ -67,11 +67,23 @@ class SwimmersMapperTest {
     @Test
     @Transactional
     void 新しい水泳選手が登録できること() {
-        Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
+        Swimmer swimmer = new Swimmer("Zhang", "Fufei");
         swimmersMapper.create(swimmer);
         Optional<Swimmer> retrievedSwimmer = swimmersMapper.findById(swimmer.getId());
         assertThat(retrievedSwimmer).isPresent();
         assertThat(retrievedSwimmer.get().getName()).isEqualTo(swimmer.getName());
         assertThat(retrievedSwimmer.get().getStroke()).isEqualTo(swimmer.getStroke());
+    }
+
+    @Sql(
+            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+    )
+    @Test
+    @Transactional
+    void 更新した水泳選手の情報が反映されること() {
+        swimmersMapper.update(1, "Sarah Sjostrom", "IM");
+        Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(1);
+        assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
     }
 }
