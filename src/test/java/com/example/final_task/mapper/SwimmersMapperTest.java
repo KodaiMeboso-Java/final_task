@@ -67,7 +67,7 @@ class SwimmersMapperTest {
     @Test
     @Transactional
     void 新しい水泳選手が登録できること() {
-        Swimmer swimmer = new Swimmer("Zhang ", "Fufei");
+        Swimmer swimmer = new Swimmer("Zhang", "Fufei");
         swimmersMapper.create(swimmer);
         Optional<Swimmer> retrievedSwimmer = swimmersMapper.findById(swimmer.getId());
         assertThat(retrievedSwimmer).isPresent();
