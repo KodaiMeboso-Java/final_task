@@ -72,6 +72,10 @@ class SwimmersMapperTest {
     void 新しい水泳選手が登録できること() {
         Swimmer swimmer = new Swimmer("Zhang", "Fufei");
         swimmersMapper.create(swimmer);
+        Optional<Swimmer> retrievedSwimmer = swimmersMapper.findById(swimmer.getId());
+        assertThat(retrievedSwimmer).isPresent();
+        assertThat(retrievedSwimmer.get().getName()).isEqualTo(swimmer.getName());
+        assertThat(retrievedSwimmer.get().getStroke()).isEqualTo(swimmer.getStroke());
     }
 
     @Sql(
