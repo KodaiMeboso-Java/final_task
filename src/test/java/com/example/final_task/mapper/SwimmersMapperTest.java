@@ -15,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql(
+        scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
+        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
+)
 class SwimmersMapperTest {
 
     @Autowired
     SwimmersMapper swimmersMapper;
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 全ての水泳選手が取得できること() {
@@ -37,10 +37,6 @@ class SwimmersMapperTest {
                 );
     }
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 指定した水泳選手が取得できること() {
@@ -48,10 +44,6 @@ class SwimmersMapperTest {
         assertThat(swimmer).isEqualTo((Optional.of(new Swimmer(1, "Michael Phelps", "Butterfly"))));
     }
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 指定したidが存在しない場合に返ってくるデータが空であること() {
@@ -60,10 +52,6 @@ class SwimmersMapperTest {
         assertThat(swimmer).isEmpty();
     }
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 新しい水泳選手が登録できること() {
@@ -75,10 +63,6 @@ class SwimmersMapperTest {
         assertThat(retrievedSwimmer.get().getStroke()).isEqualTo(swimmer.getStroke());
     }
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 更新した水泳選手の情報が反映されること() {
@@ -89,10 +73,6 @@ class SwimmersMapperTest {
         assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
     }
 
-    @Sql(
-            scripts = {"classpath:/delete-swimmers.sql", "classpath:/insert-swimmers.sql"},
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-    )
     @Test
     @Transactional
     void 水泳選手が削除できること() {
