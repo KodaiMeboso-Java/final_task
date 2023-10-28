@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -84,13 +83,10 @@ class SwimmersMapperTest {
     @Transactional
     void 更新した水泳選手の情報が反映されること() {
         Optional<Swimmer> updateSwimmer = swimmersMapper.findById(1);
-        if (updateSwimmer.isPresent()) {
-            swimmersMapper.update(1, "Sarah Sjostrom", "IM");
-            Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(1);
-            assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
-        } else {
-            fail("Test swimmer data does not exist");
-        }
+        assertThat(updateSwimmer).isEqualTo((Optional.of(new Swimmer(1, "Michael Phelps", "Butterfly"))));
+        swimmersMapper.update(1, "Sarah Sjostrom", "IM");
+        Optional<Swimmer> updatedSwimmer = swimmersMapper.findById(1);
+        assertThat(updatedSwimmer).isEqualTo(Optional.of(new Swimmer(1, "Sarah Sjostrom", "IM")));
     }
 
     @Sql(
@@ -100,14 +96,10 @@ class SwimmersMapperTest {
     @Test
     @Transactional
     void 水泳選手が削除できること() {
-        int id = 1;
-        Optional<Swimmer> Swimmer = swimmersMapper.findById(id);
-        if (Swimmer.isPresent()) {
-            swimmersMapper.delete(id);
-            Optional<Swimmer> deleteSwimmer = swimmersMapper.findById(id);
-            assertThat(deleteSwimmer).isEmpty();
-        } else {
-            fail("Test swimmer data does not exist");
-        }
+        Optional<Swimmer> deleteSwimmer = swimmersMapper.findById(1);
+        assertThat(deleteSwimmer).isEqualTo((Optional.of(new Swimmer(1, "Michael Phelps", "Butterfly"))));
+        swimmersMapper.delete(1);
+        Optional<Swimmer> deletedSwimmer = swimmersMapper.findById(1);
+        assertThat(deletedSwimmer).isEmpty();
     }
 }
